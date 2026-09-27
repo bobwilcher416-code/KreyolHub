@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MathJeunes 🇭🇹</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #172033;
+      color: white;
+      padding: 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+    }
+
+    header p {
+      margin-top: 6px;
+      color: #cbd5e1;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #2563eb, #172033);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .hero h2 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .levels {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .level {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .level h3 {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .level p {
+      color: #64748b;
+      margin-bottom: 20px;
+    }
+
+    button {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 12px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    #quiz {
+      display: none;
+      background: white;
+      margin-top: 35px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    #question {
+      font-size: 30px;
+      margin: 25px 0;
+    }
+
+    #answer {
+      padding: 13px;
+      width: 200px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 17px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      min-height: 25px;
+    }
+
+    #score {
+      margin-top: 15px;
+      color: #2563eb;
+      font-weight: bold;
+    }
+
+    .lesson {
+      margin-top: 35px;
+      background: #eaf2ff;
+      padding: 25px;
+      border-radius: 15px;
+    }
+
+    .lesson h3 {
+      margin-bottom: 10px;
+    }
+
+    .lesson p {
+      line-height: 1.7;
+    }
+
+    footer {
+      margin-top: 50px;
+      background: #172033;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+
+    @media (max-width: 650px) {
+      .levels {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 30px;
+      }
+
+      #question {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>MathJeunes 🇭🇹</h1>
+  <p>Apprendre les maths gratuitement</p>
+</header>
+
+
+<section class="hero">
+
+  <h2>Les maths deviennent plus faciles 🧠</h2>
+
+  <p>
+    Des exercices simples et amusants pour aider les jeunes
+    du primaire au secondaire à progresser en mathématiques.
+  </p>
+
+</section>
+
+
+<div class="container">
+
+  <div class="title">
+    <h2>Choisis ton niveau 📚</h2>
+    <p>Commence à apprendre gratuitement.</p>
+  </div>
+
+
+  <div class="levels">
+
+    <div class="level">
+
+      <h3>🧒 Primaire</h3>
+
+      <p>
+        Addition, soustraction, multiplication
+        et division.
+      </p>
+
+      <button onclick="startQuiz('primaire')">
+        Commencer
+      </button>
+
+    </div>
+
+
+    <div class="level">
+
+      <h3>🎓 Secondaire</h3>
+
+      <p>
+        Algèbre, équations et calculs.
+      </p>
+
+      <button onclick="startQuiz('secondaire')">
+        Commencer
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div id="quiz">
+
+    <h2>🧠 Quiz de mathématiques</h2>
+
+    <p id="question"></p>
+
+    <input
+      id="answer"
+      type="number"
+      placeholder="Ta réponse"
+    >
+
+    <br>
+
+    <button onclick="checkAnswer()">
+      Vérifier
+    </button>
+
+    <div id="result"></div>
+
+    <div id="score">
+      Score : 0
+    </div>
+
+  </div>
+
+
+  <div class="lesson">
+
+    <h3>💡 Petit conseil</h3>
+
+    <p>
+      Ne cherche pas seulement à trouver la réponse.
+      Essaie de comprendre pourquoi la réponse est correcte.
+      C'est comme ça que tu deviens meilleur en maths.
+    </p>
+
+  </div>
+
+</div>
+
+
+<footer>
+
+  <p>
+    © 2026 MathJeunes 🇭🇹
+  </p>
+
+  <p>
+    Un projet créé pour aider les jeunes à apprendre.
+  </p>
+
+</footer>
+
+
+<script>
+
+let level = "";
+let correctAnswer = 0;
+let score = 0;
+
+
+function startQuiz(selectedLevel) {
+
+  level = selectedLevel;
+
+  score = 0;
+
+  document.getElementById("quiz").style.display = "block";
+
+  document.getElementById("score").innerText =
+    "Score : 0";
+
+  generateQuestion();
+
+  document
+    .getElementById("quiz")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+}
+
+
+function generateQuestion() {
+
+  let a;
+  let b;
+  let operation;
+
+  if (level === "primaire") {
+
+    a = Math.floor(Math.random() * 20) + 1;
+    b = Math.floor(Math.random() * 20) + 1;
+
+    operation =
+      Math.floor(Math.random() * 3);
+
+    if (operation === 0) {
+
+      correctAnswer = a + b;
+
+      document.getElementById("question").innerText =
+        a + " + " + b + " = ?";
+
+    }
+
+    else if (operation === 1) {
+
+      if (b > a) {
+        let temp = a;
+        a = b;
+        b = temp;
+      }
+
+      correctAnswer = a - b;
+
+      document.getElementById("question").innerText =
+        a + " - " + b + " = ?";
+
+    }
+
+    else {
+
+      a = Math.floor(Math.random() * 10) + 1;
+      b = Math.floor(Math.random() * 10) + 1;
+
+      correctAnswer = a * b;
+
+      document.getElementById("question").innerText =
+        a + " × " + b + " = ?";
+    }
+
+  }
+
+
+  else {
+
+    a = Math.floor(Math.random() * 20) + 1;
+    b = Math.floor(Math.random() * 20) + 1;
+
+    correctAnswer = a + b;
+
+    document.getElementById("question").innerText =
+      "Si x + " + a + " = " +
+      (a + b) + ", combien vaut x ?";
+  }
+
+
+  document.getElementById("answer").value = "";
+
+  document.getElementById("result").innerText = "";
+}
+
+
+function checkAnswer() {
+
+  let userAnswer =
+    Number(document.getElementById("answer").value);
+
+  if (
+    document.getElementById("answer").value === ""
+  ) {
+
+    document.getElementById("result").innerText =
+      "Écris une réponse.";
+
+    return;
+  }
+
+
+  if (userAnswer === correctAnswer) {
+
+    score += 10;
+
+    document.getElementById("result").innerText =
+      "✅ Bravo ! Bonne réponse !";
+
+    document.getElementById("score").innerText =
+      "Score : " + score;
+
+    setTimeout(generateQuestion, 1200);
+
+  }
+
+  else {
+
+    document.getElementById("result").innerText =
+      "❌ Pas encore. Essaie encore !";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
